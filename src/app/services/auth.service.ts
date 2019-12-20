@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {ApiService} from './api.service';
 import {HttpHeaders} from '@angular/common/http';
 import {BehaviorSubject} from 'rxjs';
@@ -18,22 +18,32 @@ export class AuthService {
       const headers = new HttpHeaders({
         'Content-Type': 'application/json',
       });
+      this.apiService.post('/login', user, {headers}).then(data => {
+        let roles = data.user.roles;
+        console.log('avant verification');
+        this.verifyRole(roles).then(resp => {
+          console.log('apres verification');
+          console.log('reponse', resp);
+          if (resp) {
+            this.storeUser(data);
+            resolve(data);
+          } else {
+            reject();
+          }
+        });
 
-      this.apiService.post('/login', user, { headers }).then(data => {
-        this.storeUser(data);
-        resolve(data);
       }).catch(err => {
         reject(err);
       });
     });
   }
 
-  sendEmail(email:string){
+  sendEmail(email: string) {
     return new Promise((resolve, reject) => {
       const headers = new HttpHeaders({
         'Content-Type': 'application/json',
       });
-      this.apiService.post('/send_email', { email:email }, { headers }).then(data => {
+      this.apiService.post('/send_email', {email: email}, {headers}).then(data => {
         resolve(data);
       }).catch(err => {
         reject(err);
@@ -53,7 +63,7 @@ export class AuthService {
       const headers = new HttpHeaders({
         'Content-Type': 'application/json',
       });
-      this.apiService.post('/forgot_password', user, { headers }).then(data => {
+      this.apiService.post('/forgot_password', user, {headers}).then(data => {
         resolve(data);
       }).catch(err => {
         reject(err);
@@ -62,22 +72,32 @@ export class AuthService {
   }
 
   private checkToken() {
-    let token  = localStorage.getItem("token");
-    console.log("the token", token);
-    if(token !== null){
+    let token = localStorage.getItem('token');
+    console.log('the token', token);
+    if (token !== null) {
       const headers = new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': "Bearer " + token.substring(1,token.length-1)
+        'Authorization': 'Bearer ' + token.substring(1, token.length - 1)
       });
-      this.apiService.get('/check_token',{ headers:headers }).then(resp=>{
+      this.apiService.get('/check_token', {headers: headers}).then(resp => {
         console.log(resp);
-        this.authenticationState.next(true)
-      }).catch(err=>{
+        this.authenticationState.next(true);
+      }).catch(err => {
         this.authenticationState.next(false);
         console.log(err);
       });
-    }else{
+    } else {
       this.authenticationState.next(false);
     }
   }
+
+  private async verifyRole(roles: any) {
+    for (let i = 0; i < roles.length; i++) {
+      if (roles[i].role == 'ROLE_CLIENT') {
+        return true;
+      }
+    }
+    return false;
+  }
+
 }

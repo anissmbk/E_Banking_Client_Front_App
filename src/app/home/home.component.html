@@ -1,1 +1,64 @@
-<p>home works!</p>
+<div class="page-breadcrumb">
+  <div class="row">
+    <div class="col-12 d-flex no-block align-items-center">
+      <h3 class="page-title">Welcome {{client?.firstname}} !</h3>
+      <div class="ml-auto text-right">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">My accounts</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+<div class="container-fluid">
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="comment-widgets scrollable">
+        <div class="d-flex flex-row comment-row m-t-0">
+          <div class="p-2"><img src="../../assets/images/users/1.jpg" alt="user" width="50" class="rounded-circle"></div>
+          <div class="comment-text w-100">
+            <h6 class="font-medium"><b>{{client?.lastname}} {{client?.firstname}}</b></h6>
+            <span class="m-b-15 d-block"><i class="mdi mdi-cellphone"></i>&nbsp;&nbsp;<span>{{client?.numtel}}</span></span>
+            <span class="m-b-15 d-block"><i class="mdi mdi-gmail"></i>&nbsp;&nbsp;<span>{{client?.email}}</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="page-breadcrumb">
+  <div class="row">
+    <div class="col-12 d-flex no-block align-items-center">
+      <h3><i class="fa fa-angle-right"></i>My Accounts</h3>
+    </div>
+  </div>
+</div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12" style="cursor: pointer;" (click)="navigateTo(acc.id)" *ngFor="let acc of client?.account">
+      <div class="card">
+        <div class="comment-widgets scrollable">
+          <div class="d-flex flex-row comment-row m-t-0">
+            <div class="p-2"><img src="../../assets/images/accountCard.png" alt="user" width="50"></div>
+            <div class="comment-text w-100">
+              <h6 class="font-medium"><b>{{acc?.typecontrat?.name}}</b></h6>
+              <span class="m-b-15 d-block"><span style="color: blue"><b>{{acc?.rib}}</b></span></span>
+              <div class="comment-footer">
+                <span class="float-right" style="color: limegreen">{{acc?.balance}}<b>&nbsp;&nbsp;MAD</b></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

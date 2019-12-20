@@ -13,15 +13,18 @@ import {Router} from '@angular/router';
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   submitted = false;
-  user: any ;
+  user: any;
   // @ts-ignore
-  @ViewChild("rememberMe") rememberMe: ElementRef;
-  constructor(private formBuilder: FormBuilder, private authService: AuthService,
-              private router:Router
-  ) { }
+  @ViewChild('rememberMe') rememberMe: ElementRef;
 
-  ngAfterViewInit(){
-    //this.authService.authenticationState.next(false);
+  constructor(private formBuilder: FormBuilder, private authService: AuthService,
+              private router: Router
+  ) {
+  }
+
+  // tslint:disable-next-line:use-lifecycle-interface
+  ngAfterViewInit() {
+    // this.authService.authenticationState.next(false);
   }
 
   ngOnInit() {
@@ -33,7 +36,9 @@ export class LoginComponent implements OnInit {
     }, {});
   }
 
-  get f() { return this.loginForm.controls; }
+  get f() {
+    return this.loginForm.controls;
+  }
 
   login() {
     this.submitted = true;
@@ -49,10 +54,10 @@ export class LoginComponent implements OnInit {
     $('.preloader').fadeIn();
     this.user = this.loginForm.value;
     this.authService.loginUser(this.user).then(resp => {
-      this.rememberMe.nativeElement.checked ? localStorage.setItem('rememberMe', "1") : localStorage.setItem('rememberMe', "0");
+      this.rememberMe.nativeElement.checked ? localStorage.setItem('rememberMe', '1') : localStorage.setItem('rememberMe', '0');
       console.log(resp);
       $('.preloader').fadeOut();
-      this.router.navigateByUrl('/home')
+      this.router.navigateByUrl('/home');
     }).catch(err => {
       $('.preloader').fadeOut();
       Swal.fire({
@@ -87,10 +92,10 @@ export class LoginComponent implements OnInit {
       },
       allowOutsideClick: () => !Swal.isLoading()
     }).then((result) => {
-      console.log("resultat: ", result);
+      console.log('resultat: ', result);
       Swal.fire({
         icon: 'success',
-        title: 'Oops...',
+        title: 'success changes',
         text: 'Veuillez verifier votre email :^D',
       });
     });
