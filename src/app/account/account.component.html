@@ -5,9 +5,9 @@
         <div class="comment-widgets scrollable">
           <div class="d-flex flex-row comment-row m-t-0">
             <div class="comment-text w-100">
-              <h4 class="font-medium" style="color: black"><b>{{account.typeContrat}}</b></h4>
-              <h6 class="font-medium">Account Number : <b>{{account.rib}}</b></h6>
-              <h6 class="font-medium">Balance : <b style="color: blue">{{account.amount}}</b></h6>
+              <h4 class="font-medium" style="color: black"><b>{{account?.typeContrat}}</b></h4>
+              <h6 class="font-medium">Account Number : <b>{{account?.rib}}</b></h6>
+              <h6 class="font-medium">Balance : <b style="color: blue">{{account?.amount}}</b></h6>
             </div>
           </div>
         </div>
@@ -63,3 +63,7 @@
     </div>
   </div>
 </div>
+
+<footer style="position: relative;right: 10px;" class="footer text-right">
+  All Rights Reserved by Atlas Team. Designed and Developed by <a href="#">Projet team</a>.
+</footer>

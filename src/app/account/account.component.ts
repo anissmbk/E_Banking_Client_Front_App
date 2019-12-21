@@ -44,7 +44,10 @@ export class AccountComponent implements OnInit {
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
       // @ts-ignore
-      this.account.typeContrat = resp.account.typecontrat.name;
+      if (typeof resp.account.typecontrat === 'undefined' || resp.account.typecontrat === null) {} else {
+        // @ts-ignore
+        this.account.typeContrat = resp.account.typecontrat.name;
+      }
       // @ts-ignore
       this.account.rib = resp.account.rib;
       // @ts-ignore

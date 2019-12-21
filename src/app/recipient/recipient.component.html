@@ -1,0 +1,154 @@
+<!--
+<div class="container main">
+  <div class="row">
+    <div class="col-md-6">
+      <h3>Recipient Information</h3>
+      <form action="@{/transfer/recipient/save}" method="post">
+        <input type="hidden" name="id" value="${recipient.id}" />
+
+        <div class="form-group">
+          <label for="recipientName">Name</label>
+          <input type="text" class="form-control" value="${recipient.name}" name="name"
+                 id="recipientName" placeholder="Name"/>
+        </div>
+        <div class="form-group">
+          <label for="recipientEmail">Email</label>
+          <input type="email" class="form-control" value="${recipient.email}" name="email"
+                 id="recipientEmail" placeholder="Email"/>
+        </div>
+        <div class="form-group">
+          <label for="recipientPhone">Phone</label>
+          <input type="text" class="form-control" value="${recipient.phone}" name="phone"
+                 id="recipientPhone" placeholder="Phone"/>
+        </div>
+        <div class="form-group">
+          <label for="recipientAccountNumber">Account Number</label>
+          <input type="text" class="form-control" value="${recipient.accountNumber}"
+                 name="accountNumber" id="recipientAccountNumber" placeholder="Account Number"/>
+        </div>
+        <div class="form-group">
+          <label for="recipientDescription">Description</label>
+          <textarea class="form-control" value="${recipient.description}" name="description"
+                    id="recipientDescription" placeholder="Description" text="${recipient.description}"></textarea>
+        </div>
+
+        <input type="hidden"
+               name="${_csrf.parameterName}"
+               value="${_csrf.token}"/>
+
+        <button class="btn btn-primary" type="submit">Add/Edit Recipient</button>
+      </form>
+
+      <div class="col-md-6">
+      </div>
+    </div>
+  </div>
+  <br/>
+  <div class="row">
+    <h3>List of Recipients</h3>
+    <div class="table-responsive">
+      <table class="table table-bordered table-hover table-striped">
+        <thead>
+        <tr>
+          <th>Recipient Name</th>
+          <th>Recipient Email</th>
+          <th>Recipient Phone</th>
+          <th>Recipient Account Number</th>
+          <th>Description</th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr data-th-each="eachRecipient : ${recipientList}">
+          <td><a data-th-text="${eachRecipient.name}" href="@{/transfer/recipient/edit?recipientName=}+${eachRecipient.name}">...</a></td>
+          <td data-th-text="${eachRecipient.email}">...</td>
+          <td data-th-text="${eachRecipient.phone}">...</td>
+          <td data-th-text="${eachRecipient.accountNumber}">...</td>
+          <td data-th-text="${eachRecipient.description}">...</td>
+          <td><a href="@{/transfer/recipient/delete?recipientName=}+${eachRecipient.name}">delete</a></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+-->
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <form [formGroup]="recipientForm" (ngSubmit)="addRecipient()" class="login100-form validate-form">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Recipient</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group row">
+          <label class="col-sm-3 text-left control-label col-form-label">Full Name</label>
+          <div class="col-sm-9">
+            <input type="text" placeholder="Enter full Name" formControlName="fullName" class="form-control">
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-sm-3 text-left control-label col-form-label">Rib</label>
+          <div class="col-sm-9">
+          <input type="text" placeholder="Enter Rib" formControlName="rib" class="form-control">
+          </div>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+    </form>
+  </div>
+</div>
+
+<div class="container-fluid" [ngStyle]="{'height' : height + 'px'}">
+  <div class="row">
+    <div class="col-12">
+      <div class="search-div" style="text-align: right ;background-color: transparent">
+        <div style="background-color: transparent;width: 40%;display: inline">
+          <a class="m-b-0 font-medium p-0 text-right" id="update" data-toggle="modal" data-target="#exampleModal" style="width: 50%;cursor: pointer">
+            <i class=" fa fa-plus w-30px m-t-5"></i>
+            Add Recipient &nbsp;&nbsp;&nbsp;
+          </a>
+          <mat-form-field style="background-color: transparent" class="search-form-field" floatLabel="never">
+            <input matInput [(ngModel)]="searchKey" placeholder="search" autocomplete="off" (keyup)="applyFilter()">
+            <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey" (click)="onsearchClear()">
+              <mat-icon>close</mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="wrapper">
+        <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8" style="width: 100%;background-color: transparent">
+
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Full Name </th>
+            <td mat-cell *matCellDef="let element"> {{element?.name}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="rib">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Rib </th>
+            <td mat-cell *matCellDef="let element"> {{element?.rib}} </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row (click)="getRecord(row)" *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+        <!-- Angular 8 pagination -->
+        <mat-paginator [pageSizeOptions]="[10, 5]" showFirstLastButtons></mat-paginator>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer style="position: relative;right: 10px;margin-top: 70px" class="footer text-right">
+  All Rights Reserved by Atlas Team. Designed and Developed by <a href="#">Projet team</a>.
+</footer>

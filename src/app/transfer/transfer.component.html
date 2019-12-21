@@ -1,0 +1,37 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-6" style="margin-left: 20px;margin-top: 20px">
+      <form [formGroup]="registrationForm" (ngSubmit)="transferMoney()">
+        <div class="form-group" >
+          <label>1. Please choose the recipient:</label>
+          <select class="form-control" (change)="changeRecipient($event)" formControlName="recipientName">
+            <option value="" disabled>-- select the recipient --</option>
+            <option *ngFor="let recipient of recipients" [ngValue]="recipient?.rib">{{recipient?.name}}</option>
+          </select>
+          <br />
+        </div>
+
+        <div class="form-group" >
+          <label>2. Please select the account you would like to transfer from:</label>
+          <select class="form-control" (change)="changeAccount($event)" formControlName="accountName">
+            <option value="" disabled> -- select your account -- </option>
+            <option *ngFor="let account of accounts" [ngValue]="account?.rib">{{account?.rib}}</option>
+          </select>
+          <br />
+        </div>
+
+        <div class="form-group">
+          <label>3. Please specify the amount you would like to transfer: </label>
+          <span class="input-group-addon">Amount $</span>
+          <input type="number" name="amount" class="form-control" formControlName="amount"/>
+        </div>
+
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Transfer</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+  <footer style="position: relative;right: 10px;" class="footer text-right">
+  All Rights Reserved by Atlas Team. Designed and Developed by <a href="#">Projet team</a>.
+</footer>

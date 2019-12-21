@@ -13,6 +13,9 @@ import { AccountComponent } from './account/account.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableModule } from '@angular/material/table';
 import {MatButtonModule, MatFormFieldModule, MatIconModule, MatInputModule, MatPaginatorModule, MatSortModule} from '@angular/material';
+import { RecipientComponent } from './recipient/recipient.component';
+import { ProfileComponent } from './profile/profile.component';
+import { TransferComponent } from './transfer/transfer.component';
 
 
 @NgModule({
@@ -22,6 +25,9 @@ import {MatButtonModule, MatFormFieldModule, MatIconModule, MatInputModule, MatP
     LoginComponent,
     ForgotPasswordComponent,
     AccountComponent,
+    RecipientComponent,
+    ProfileComponent,
+    TransferComponent,
   ],
     imports: [
         BrowserModule,
