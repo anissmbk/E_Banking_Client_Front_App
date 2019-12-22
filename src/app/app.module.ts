@@ -16,8 +16,6 @@ import {MatButtonModule, MatFormFieldModule, MatIconModule, MatInputModule, MatP
 import { RecipientComponent } from './recipient/recipient.component';
 import { ProfileComponent } from './profile/profile.component';
 import { TransferComponent } from './transfer/transfer.component';
-import { BadTransactionComponent } from './bad-transaction/bad-transaction.component';
-import { BadTransactionDetailsComponent } from './bad-transaction-details/bad-transaction-details.component';
 
 
 @NgModule({
@@ -29,9 +27,7 @@ import { BadTransactionDetailsComponent } from './bad-transaction-details/bad-tr
     AccountComponent,
     RecipientComponent,
     ProfileComponent,
-    TransferComponent,
-    BadTransactionComponent,
-    BadTransactionDetailsComponent,
+    TransferComponent
   ],
     imports: [
         BrowserModule,
