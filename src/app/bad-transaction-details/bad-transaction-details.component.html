@@ -1,0 +1,13 @@
+<button (click)="validerTransaction()">Valide Transaction</button>
+<button (click)="removeTransaction()">Delete Transaction</button>
+
+<div><b>createdDate : </b><p>{{transaction?.transaction?.createdDate[2]}}/{{transaction?.transaction?.createdDate[1]}}/{{transaction?.transaction?.createdDate[0]}}</p></div>
+<div><b>idTransaction : </b><p>{{transaction?.transaction?.id}}</p></div>
+<div><b>amount de Transaction : </b><p>{{transaction?.transaction?.amount}}</p></div>
+<div><b>validite de Transaction : </b><p>{{transaction?.transaction?.active}}</p></div>
+<div> <b>account li dar transaction : </b><p>{{transaction?.account}}</p></div>
+<div> <b>transaction recipient rib : </b><p>{{transaction?.recipientRib}}</p></div>
+<div> <b>recipient full Name: </b><p>{{transaction?.recipient?.firstname}} {{transaction?.recipient?.lastname}}</p></div>
+<div> <b>recipient email: </b><p>{{transaction?.recipient?.email}}</p></div>
+<div> <b>recipient tel: </b><p>(+212){{transaction?.recipient?.numtel}}</p></div>
+<div> <b>recipient adress: </b><p>{{transaction?.recipient?.adress}}</p></div>

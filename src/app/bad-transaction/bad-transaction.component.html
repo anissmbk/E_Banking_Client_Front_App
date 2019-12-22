@@ -1,0 +1,44 @@
+<div class="container-fluid" [ngStyle]="{'height' : height + 'px'}">
+  <div class="row">
+    <div class="col-12">
+      <div class="search-div" style="text-align: right ;background-color: transparent">
+        <div style="background-color: transparent;width: 40%;display: inline">
+          <mat-form-field style="background-color: transparent" class="search-form-field" floatLabel="never">
+            <input matInput [(ngModel)]="searchKey" placeholder="search" autocomplete="off" (keyup)="applyFilter()">
+            <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey" (click)="onsearchClear()">
+              <mat-icon>close</mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="wrapper">
+        <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8" style="width: 100%;background-color: transparent">
+
+          <ng-container matColumnDef="creation_date">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
+            <td mat-cell *matCellDef="let element"> {{element?.createdDate[2]}}/{{element?.createdDate[1]}}/{{element?.createdDate[0]}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="transaction_id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Transaction Id </th>
+            <td mat-cell *matCellDef="let element"> {{element?.id}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="amount">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Amount </th>
+            <td mat-cell *matCellDef="let element"> {{element?.amount}} </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row (click)="getRecord(row)" *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+        <!-- Angular 8 pagination -->
+        <mat-paginator [pageSizeOptions]="[10, 5]" showFirstLastButtons></mat-paginator>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer style="position: relative;right: 10px;margin-top: 70px" class="footer text-right">
+  All Rights Reserved by Atlas Team. Designed and Developed by <a href="#">Projet team</a>.
+</footer>

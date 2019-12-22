@@ -6,6 +6,8 @@ import {ForgotPasswordComponent} from './forgot-password/forgot-password.compone
 import {AccountComponent} from './account/account.component';
 import {RecipientComponent} from './recipient/recipient.component';
 import {TransferComponent} from './transfer/transfer.component';
+import {BadTransactionComponent} from './bad-transaction/bad-transaction.component';
+import {BadTransactionDetailsComponent} from './bad-transaction-details/bad-transaction-details.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full'},
@@ -17,6 +19,8 @@ const routes: Routes = [
   { path: 'account/:id', component: AccountComponent },
   { path: 'recipients', component: RecipientComponent },
   { path: 'transfer', component: TransferComponent },
+  { path: 'badTransactions', component: BadTransactionComponent },
+  { path: 'badTransactionDetails/:id', component: BadTransactionDetailsComponent },
 ];
 
 @NgModule({
