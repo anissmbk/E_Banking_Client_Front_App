@@ -3,6 +3,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {PurchasesComponent} from './purchases.component';
 import {OperatorComponent} from './operator/operator.component';
 import {PurchaseFormComponent} from "./purchase-form/purchase-form.component";
+import {PurchasesHistoryComponent} from "./purchases-history/purchases-history.component";
 
 const routes: Routes = [{
   path: '',
@@ -13,7 +14,11 @@ const routes: Routes = [{
   }, {
     path: 'purchase',
     component: PurchaseFormComponent,
-  }
+  },
+    {
+      path:'history',
+      component: PurchasesHistoryComponent
+    }
   ],
 }];
 

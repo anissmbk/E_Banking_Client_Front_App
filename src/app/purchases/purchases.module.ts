@@ -4,11 +4,12 @@ import {OperatorComponent} from './operator/operator.component';
 import {PurchasesComponent} from './purchases.component';
 import {RouterModule} from "@angular/router";
 import {PurchasesRoutingModule} from "./purchases-routing.module";
-import { OperatorFavoriteComponent } from './operator-favorite/operator-favorite.component';
-import { PurchasesHistoryComponent } from './purchases-history/purchases-history.component';
-import { PurchaseHistoryDetailsComponent } from './purchase-history-details/purchase-history-details.component';
-import { PurchaseFormComponent } from './purchase-form/purchase-form.component';
+import {OperatorFavoriteComponent} from './operator-favorite/operator-favorite.component';
+import {PurchasesHistoryComponent} from './purchases-history/purchases-history.component';
+import {PurchaseHistoryDetailsComponent} from './purchase-history-details/purchase-history-details.component';
+import {PurchaseFormComponent} from './purchase-form/purchase-form.component';
 import {FormsModule} from "@angular/forms";
+import {NgbPaginationModule} from "@ng-bootstrap/ng-bootstrap";
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import {FormsModule} from "@angular/forms";
   imports: [
     CommonModule,
     PurchasesRoutingModule,
-    FormsModule
+    FormsModule,
+    NgbPaginationModule
   ]
 })
 export class PurchasesModule {

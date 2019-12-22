@@ -3,5 +3,6 @@ export interface Purchase {
   type?: string,
   amount?: number,
   phoneNumber?: string,
-  rib?: string
+  rib?: string,
+  createdDate?: string
 }

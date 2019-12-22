@@ -1,1 +1,36 @@
-<p>purchases-history works!</p>
+<div *ngIf="purchases && !purchases.length" class="alert alert-warning">
+  <p>No purchases found</p>
+</div>
+<div class="table-responsive position-relative">
+  <table *ngIf="purchases && purchases.length" class="table">
+    <thead>
+    <tr>
+      <th scope="col">Phone number</th>
+      <th scope="col" class="text-center">Type</th>
+      <th scope="col" class="text-center">Amount</th>
+      <th scope="col" class="text-right">Date de création</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let purchase of purchases">
+      <td>{{purchase?.phoneNumber | titlecase}}</td>
+      <td class="text-center">{{purchase?.type}}</td>
+      <td class="text-center">{{purchase?.amount }}</td>
+      <td class="text-right">
+        {{purchase.createdDate | date: 'shortDate'}} <span
+        class="text-muted">{{purchase.createdDate | date: 'shortTime'}}</span>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<div *ngIf="purchases && purchases.length" class="row">
+  <div class="col-sm-6 table-records-info">
+    Affichage de {{pageSize * (page - 1) + 1}} - {{ pageSize * page > totalCount ? totalCount : pageSize * page }}
+    sur {{totalCount}}
+  </div>
+  <div class="col-sm-6 table-records-pages pull-right">
+    <ngb-pagination [collectionSize]="totalCount" [(page)]="page" [pageSize]="pageSize" (pageChange)="loadPurchases()"
+                    [boundaryLinks]="true"></ngb-pagination>
+  </div>
+</div>
