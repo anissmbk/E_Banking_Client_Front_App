@@ -1,0 +1,60 @@
+<h4>Recharge / Operator</h4>
+<div class="row mt-5">
+  <div class="col-sm-12">
+    <form>
+      <div class="row form-group">
+        <label class="col-sm-3">Numéro de téléphone (*)</label>
+        <div class="input-group col-sm-2">
+          <input class="form-control" type="text">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-3">Montant (*) </label>
+        <div class="input-group col-sm-2">
+          <select class="form-control col-sm-12" name="amount">
+            <option value="10">10</option>
+            <option value="20">20</option>
+            <option value="25">25</option>
+            <option value="30">30</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+            <option value="200">200</option>
+            <option value="300">300</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-3">Type de Recharge (*) </label>
+        <div class="input-group col-sm-2">
+          <select  class="form-control col-sm-12" name="type">
+            <option *ngFor="let purchaseType of purchaseTypes" value="{{purchaseType.type}}">{{purchaseType.type}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-3">Compte à Débiter (*) </label>
+        <div class="input-group col-sm-2">
+          <select class="form-control col-sm-12" name="type">
+            <option value="1">Compte Test</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-sm-3">
+          <input class="mr-2" type="checkbox">
+          <label>Ajouter aux favoris avec le libellé </label>
+        </div>
+        <div class="input-group col-sm-2">
+          <input class="form-control" type="text">
+        </div>
+      </div>
+      <div class="row mb-4">
+        <div class="col-sm-5">
+          <button class="btn btn-success float-right mx-2">Confirmer</button>
+          <button class="btn btn-secondary float-right mx-2" routerLink="/purchases/operators">Annuler</button>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</div>

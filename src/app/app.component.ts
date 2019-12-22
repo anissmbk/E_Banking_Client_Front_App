@@ -10,11 +10,12 @@ import * as $ from 'jquery';
 })
 export class AppComponent {
   title = 'ebankingfront';
-   private isConnected: boolean;
-  // private isConnected = true;
+  // private isConnected: boolean;
+  private isConnected = true;
   height: number = $(window).height() - 64;
 
   constructor(private authService: AuthService, private router: Router) {
+/*
     this.authService.authenticationState.subscribe(state => {
       this.isConnected = state;
       let url = window.location.href;
@@ -31,5 +32,6 @@ export class AppComponent {
         }
       }
     });
+*/
   }
 }
