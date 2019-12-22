@@ -2,5 +2,6 @@ export interface Purchase {
   id?: number,
   type?: string,
   amount?: number,
-  phoneNumber?: string
+  phoneNumber?: string,
+  rib?: string
 }

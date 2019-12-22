@@ -12,6 +12,11 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'forgot_password/:token', component: ForgotPasswordComponent },
   { path: 'account/:id', component: AccountComponent },
+  {
+    path: 'purchases',
+    loadChildren: './purchases/purchases.module#PurchasesModule',
+    /*canActivate: [AdminGuard ,UserGuard ],*/
+  }
 ];
 
 @NgModule({
