@@ -1,1 +1,88 @@
-<p>profile works!</p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card">
+          <div class="card-body">
+            <div class="form-group row">
+              <label class="col-sm-3 text-left control-label col-form-label">First Name</label>
+              <div class="col-sm-9">
+                <span>{{client.firstname}}</span>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-3 text-left control-label col-form-label">Last Name</label>
+              <div class="col-sm-9">
+                <span>{{client.lastname}}</span>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-3 text-left control-label col-form-label">Email</label>
+              <div class="col-sm-9">
+                <span>{{client.email}}</span>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-3 text-left control-label col-form-label">Address</label>
+              <div class="col-sm-9">
+                <span>{{client.address}}</span>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-3 text-left control-label col-form-label">Phone</label>
+              <div class="col-sm-9">
+                <span>(+212){{client.phone}}</span>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-3 text-left control-label col-form-label">Creation date</label>
+              <div class="col-sm-9">
+                <span>{{client.creation_date}}</span>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card">
+        <form class="form-horizontal">
+          <div class="card-body">
+            <div class="accordion" id="accordionExample">
+              <div class="card m-b-0 border-top" *ngFor="let acc of accounts">
+                <div class="card-header" id="headingOne">
+                  <h5 class="mb-0">
+                    <a data-toggle="collapse" [attr.data-target]="'#collapse' + acc.id" [attr.aria-controls]="'#collapse' + acc.id" aria-expanded="false">
+                      <i class="m-r-5  far fa-credit-card" aria-hidden="true"></i>
+                      <span> {{acc?.rib}}</span>
+                    </a>
+                  </h5>
+                </div>
+                <div [id]="'collapse' + acc.id" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                  <div class="card-body">
+                    <div class="comment-text w-100">
+                      <div style="display: flex;">
+                        <h6 class="font-medium" style="width: 50%">Balance : {{acc?.balance}} DHS</h6>
+                        <h6 class="font-medium" style="width: 50%">Blocked balance : {{acc?.blockedbalance}} DHS</h6>
+                      </div>
+                      <div style="display: flex">
+                        <h6 class="font-medium" style="width: 50%;">Type account : {{acc?.typeaccount}}</h6>
+                        <h6 *ngIf="acc?.accountvalidated" class="font-medium text-success" style="width: 50%;">is active</h6>
+                        <h6 *ngIf="!acc?.accountvalidated" class="font-medium text-danger" style="width: 50%;">is Not active</h6>
+                      </div>
+                      <div style="display: flex;">
+                        <h6 class="font-medium" style="width: 50%">Activation date : {{toDate(acc?.activation_date)}}</h6>
+                        <h6 *ngIf="acc.desactivation_date == null" class="font-medium" style="width: 50%">Desactivation date : none</h6>
+                        <h6 *ngIf="acc.desactivation_date != null" class="font-medium" style="width: 50%">Desactivation date : {{toDate(acc?.desactivation_date)}}</h6>
+                      </div>
+                      <div class="comment-footer" style="margin-top: 10px">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
