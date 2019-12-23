@@ -8,7 +8,7 @@ import {OperatorFavoriteComponent} from './operator-favorite/operator-favorite.c
 import {PurchasesHistoryComponent} from './purchases-history/purchases-history.component';
 import {PurchaseHistoryDetailsComponent} from './purchase-history-details/purchase-history-details.component';
 import {PurchaseFormComponent} from './purchase-form/purchase-form.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {NgbPaginationModule} from "@ng-bootstrap/ng-bootstrap";
 
 
@@ -18,7 +18,8 @@ import {NgbPaginationModule} from "@ng-bootstrap/ng-bootstrap";
     CommonModule,
     PurchasesRoutingModule,
     FormsModule,
-    NgbPaginationModule
+    NgbPaginationModule,
+    ReactiveFormsModule
   ]
 })
 export class PurchasesModule {

@@ -8,7 +8,7 @@
       <div *ngFor="let operator of operators" class="flip-card-back">
         <div>
           <h1>{{operator.name}}</h1>
-          <button class="btn btn-primary" routerLink="/purchases/purchase">Rechager</button>
+          <button class="btn btn-primary" routerLink="/purchases/purchase/{{operator.name}}" >Rechager</button>
         </div>
       </div>
     </div>

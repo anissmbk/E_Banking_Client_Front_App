@@ -4,7 +4,9 @@ import {PurchaseType} from "../models/purchaseType";
 import {ClientService} from "../../client_service/client.service";
 import {Purchase} from "../models/purchase";
 import {PurchaseService} from "../services/purchase.service";
-import {FormBuilder, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {ActivatedRoute} from "@angular/router";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-purchase-form',
@@ -17,14 +19,32 @@ export class PurchaseFormComponent implements OnInit {
   public accounts: any;
   private id;
   private purchase: Purchase = {};
+  private operator: string;
+  purchaseForm: FormGroup;
 
   constructor(private operatorService: OperatorService,
               private clientService: ClientService,
-              private purchaseService: PurchaseService) {
+              private purchaseService: PurchaseService,
+              private route: ActivatedRoute,
+              private formBuilder: FormBuilder) {
   }
 
 
   ngOnInit() {
+
+    this.purchaseForm = this.formBuilder.group({
+      phoneNumber: ['', Validators.compose([
+        Validators.pattern('[0]{1}[5-6]{1}[0-9]{8}'),
+        Validators.required])],
+      rib: ['', [Validators.required]],
+      amount: ['', [Validators.required]],
+      type: ['', [Validators.required]],
+    }, {});
+
+    this.route.paramMap.subscribe(params =>
+      this.operator = params.get('operator')
+    )
+
     this.operatorService.getPurchaseTypes().subscribe(
       data => {
         this.purchaseTypes = data;
@@ -42,10 +62,37 @@ export class PurchaseFormComponent implements OnInit {
   }
 
   create() {
-    console.log(this.purchase);
+
+    if (this.purchaseForm.invalid){
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Champs Invalid!!!',
+      });
+      return;
+    }
+
+    this.purchase.operator = this.operator;
     this.purchaseService.createPurchase(this.purchase).subscribe(result => {
-        console.log(result);
-    })
+      console.log(result);
+      
+    }, error => {
+      console.log(error.error);
+      if (error.error === "somethings is wrong !!") {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: error.error,
+        })
+      } else if (error.error === "your balance is insufficient") {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: error.error,
+        })
+      }
+      ;
+    });
   }
 
 

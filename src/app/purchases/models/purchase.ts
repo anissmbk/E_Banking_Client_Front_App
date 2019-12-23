@@ -4,5 +4,6 @@ export interface Purchase {
   amount?: number,
   phoneNumber?: string,
   rib?: string,
-  createdDate?: string
+  createdDate?: string,
+  operator?:string
 }

@@ -12,7 +12,7 @@ const routes: Routes = [{
     path: 'operators',
     component: OperatorComponent,
   }, {
-    path: 'purchase',
+    path: 'purchase/:operator',
     component: PurchaseFormComponent,
   },
     {

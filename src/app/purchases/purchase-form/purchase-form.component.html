@@ -1,17 +1,17 @@
-<h4>Recharge / Operator</h4>
+<h4>Recharge / {{operator}}</h4>
 <div class="row mt-5">
   <div class="col-sm-12">
-    <form (ngSubmit)="create()">
+    <form [formGroup]="purchaseForm" (ngSubmit)="create()">
       <div class="row form-group">
         <label class="col-sm-3">Numéro de téléphone (*)</label>
         <div class="input-group col-sm-2">
-          <input class="form-control" type="text" name="phoneNumber" [(ngModel)]="purchase.phoneNumber">
+          <input class="form-control" type="text" formControlName="phoneNumber" name="phoneNumber" [(ngModel)]="purchase.phoneNumber">
         </div>
       </div>
       <div class="form-group row">
         <label class="col-sm-3">Montant (*) </label>
         <div class="input-group col-sm-2">
-          <select class="form-control col-sm-12" name="amount" [(ngModel)]="purchase.amount">
+          <select class="form-control col-sm-12" formControlName="amount" name="amount" [(ngModel)]="purchase.amount">
             <option value="" disabled> -- select your amount -- </option>
             <option value="10">10</option>
             <option value="20">20</option>
@@ -27,7 +27,7 @@
       <div class="form-group row">
         <label class="col-sm-3">Type de Recharge (*) </label>
         <div class="input-group col-sm-2">
-          <select  class="form-control col-sm-12" name="type" [(ngModel)]="purchase.type">
+          <select  class="form-control col-sm-12" formControlName="type" name="type" [(ngModel)]="purchase.type">
             <option value="" disabled> -- select type of refill -- </option>
             <option *ngFor="let purchaseType of purchaseTypes" value="{{purchaseType.type}}">{{purchaseType.type}}</option>
           </select>
@@ -36,7 +36,7 @@
       <div class="form-group row">
         <label class="col-sm-3">Compte à Débiter (*) </label>
         <div class="input-group col-sm-2">
-          <select class="form-control col-sm-12" name="type" [(ngModel)]="purchase.rib">
+          <select class="form-control col-sm-12" formControlName="rib" name="rib" [(ngModel)]="purchase.rib">
             <option value="" disabled> -- select your account -- </option>
             <option *ngFor="let account of accounts" value="{{account.rib}}" >{{account?.rib}}</option>
           </select>
