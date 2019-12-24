@@ -11,7 +11,7 @@ export class PurchasesHistoryComponent implements OnInit {
 
   purchases: Purchase[] = null;
   page = 1;
-  pageSize = 20;
+  pageSize = 10;
   totalCount: number;
   previousPage: any;
 

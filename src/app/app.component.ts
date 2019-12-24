@@ -15,7 +15,6 @@ export class AppComponent {
   height: number = $(window).height() - 64;
 
   constructor(private authService: AuthService, private router: Router) {
-/*
     this.authService.authenticationState.subscribe(state => {
       this.isConnected = state;
       let url = window.location.href;
@@ -32,6 +31,5 @@ export class AppComponent {
         }
       }
     });
-*/
   }
 }

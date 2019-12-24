@@ -72,28 +72,28 @@ export class PurchaseFormComponent implements OnInit {
   }
 
 
-  showModal() {
-    if (this.purchaseForm.invalid) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'Champs Invalid!!!',
-      });
-      return;
-    };
-    $('#verifyModal').modal("show");
-    this.verify();
-  }
+    showModal() {
+      if (this.purchaseForm.invalid) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Champs Invalid!!!',
+        });
+        return;
+      };
+      $('#verifyModal').modal("show");
+      this.verify();
+    }
 
-  verify() {
+    verify() {
 
-    this.phoneVerificationStart.countryCode = "212";
-    this.phoneVerificationStart.via = "sms";
-    this.phoneVerificationStart.phoneNumber = this.purchase.phoneNumber;
-    this.purchaseService.verifyPurchase(this.phoneVerificationStart).subscribe(result => {
+      this.phoneVerificationStart.countryCode = "212";
+      this.phoneVerificationStart.via = "sms";
+      this.phoneVerificationStart.phoneNumber = this.purchase.phoneNumber;
+      this.purchaseService.verifyPurchase(this.phoneVerificationStart).subscribe(result => {
 
-    })
-  }
+      })
+    }
 
 
   create() {

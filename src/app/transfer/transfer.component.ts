@@ -3,6 +3,12 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import Swal from 'sweetalert2';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ClientService} from '../client_service/client.service';
+import {PhoneVerificationStart} from "../purchases/models/phoneVerificationStart";
+import {PurchaseService} from "../purchases/services/purchase.service";
+import {Transaction} from "../purchases/models/transaction";
+import {TransactionVerification} from "../purchases/models/transactionVerification";
+
+declare var $: any;
 
 @Component({
   selector: 'app-transfer',
@@ -10,22 +16,24 @@ import {ClientService} from '../client_service/client.service';
   styleUrls: ['./transfer.component.scss']
 })
 export class TransferComponent implements OnInit {
+  private phoneVerificationStart: PhoneVerificationStart = {};
+
   isSubmitted = false;
   private id;
-  accounts: any ;
-  recipients: any ;
-  private transaction = {
-    account: '',
-    recipient: '',
-    amount: ''
-  };
-  constructor(public fb: FormBuilder, private router: Router, private clientService: ClientService, private route: ActivatedRoute) {
+  accounts: any;
+  recipients: any;
+  private transaction: Transaction={};
+  private transactionVerification: TransactionVerification = {};
+  private code: string;
+
+  constructor(private purchaseService: PurchaseService, public fb: FormBuilder, private router: Router, private clientService: ClientService, private route: ActivatedRoute) {
   }
 
   registrationForm = this.fb.group({
     recipientName: ['', [Validators.required]],
     accountName: ['', [Validators.required]],
-    amount: ['', [Validators.required]]
+    amount: ['', [Validators.required]],
+    code: [''],
   });
 
   ngOnInit() {
@@ -53,17 +61,48 @@ export class TransferComponent implements OnInit {
       onlySelf: true
     });
   }
+
   // Getter method to access formcontrols
   get accountName() {
     return this.registrationForm.get('accountName');
   }
+
   get recipientName() {
     return this.registrationForm.get('recipientName');
   }
 
+
+  showModal() {
+    if (this.registrationForm.invalid) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Champs Invalid!!!',
+      });
+      return;
+    }
+    ;
+    $('#verifyModal').modal("show");
+    this.verify();
+  }
+
+  verify() {
+
+    this.phoneVerificationStart.countryCode = "212";
+    this.phoneVerificationStart.via = "sms";
+    this.phoneVerificationStart.phoneNumber = JSON.parse(localStorage.getItem('user')).numtel;
+    this.purchaseService.verifyPurchase(this.phoneVerificationStart).subscribe(result => {
+
+    })
+
+  }
+
+
   transferMoney() {
+    $('.preloader').fadeIn();
     this.isSubmitted = true;
     if (!this.registrationForm.valid) {
+      $('.preloader').fadeOut();
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
@@ -76,12 +115,19 @@ export class TransferComponent implements OnInit {
       this.transaction.account = this.registrationForm.value.accountName.substring(3);
       this.transaction.recipient = this.registrationForm.value.recipientName.substring(3);
       this.transaction.amount = this.registrationForm.value.amount;
+      this.transactionVerification.transaction = this.transaction;
+      this.transactionVerification.countryCode = "212";
+      this.transactionVerification.phoneNumber = JSON.parse(localStorage.getItem('user')).numtel;
+      this.transactionVerification.token = this.code;
+
       console.log('apres filtrage de resultat');
       console.log(this.transaction);
       // TODO
       // zeeed wa7ed are u sure
-      this.clientService.createTransaction(this.transaction).then(resp => {
+      this.clientService.createTransaction(this.transactionVerification).then(resp => {
         console.log(resp);
+        $('.preloader').fadeOut();
+        $('#verifyModal').modal("hide");
         Swal.fire({
           icon: 'success',
           title: 'success Transaction',
@@ -93,13 +139,15 @@ export class TransferComponent implements OnInit {
           }
         });
       }).catch(err => {
+        $('.preloader').fadeOut();
         console.log(err);
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
-          text: 'error serveur :' + err,
+          text: '' + err.error,
         });
       });
     }
   }
+
 }

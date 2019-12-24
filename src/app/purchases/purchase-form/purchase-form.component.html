@@ -1,4 +1,4 @@
-<h4>Recharge / {{operator}}</h4>
+<h4>Refill / {{operator}}</h4>
 <div class="row mt-5">
   <div class="col-sm-12">
     <form [formGroup]="purchaseForm" (ngSubmit)="showModal()">
@@ -30,14 +30,14 @@
 
       <!--end modal-->
       <div class="row form-group">
-        <label class="col-sm-3">Numéro de téléphone (*)</label>
+        <label class="col-sm-3">Phone number (*)</label>
         <div class="input-group col-sm-2">
           <input class="form-control" type="text" formControlName="phoneNumber" name="phoneNumber"
                  [(ngModel)]="purchase.phoneNumber">
         </div>
       </div>
       <div class="form-group row">
-        <label class="col-sm-3">Montant (*) </label>
+        <label class="col-sm-3">Amount (*) </label>
         <div class="input-group col-sm-2">
           <select class="form-control col-sm-12" formControlName="amount" name="amount"
                   [(ngModel)]="purchase.amount">
@@ -55,7 +55,7 @@
       </div>
 
       <div class="form-group row">
-        <label class="col-sm-3">Type de Recharge (*) </label>
+        <label class="col-sm-3">Type of Refill (*) </label>
         <div class="input-group col-sm-2">
           <select class="form-control col-sm-12" formControlName="type" name="type" [(ngModel)]="purchase.type">
             <option value="" disabled> -- select type of refill --</option>
@@ -65,7 +65,7 @@
         </div>
       </div>
       <div class="form-group row">
-        <label class="col-sm-3">Compte à Débiter (*) </label>
+        <label class="col-sm-3">Account to Debit (*) </label>
         <div class="input-group col-sm-2">
           <select class="form-control col-sm-12" formControlName="rib" name="rib" [(ngModel)]="purchase.rib">
             <option value="" disabled> -- select your account --</option>
@@ -75,9 +75,9 @@
       </div>
       <div class="row mb-4">
         <div class="col-sm-5">
-          <button class="btn btn-success float-right mx-2">Confirmer
+          <button class="btn btn-success float-right mx-2">Confirm
           </button>
-          <button class="btn btn-secondary float-right mx-2" routerLink="/purchases/operators">Annuler</button>
+          <button class="btn btn-secondary float-right mx-2" routerLink="/purchases/operators">Cancel</button>
         </div>
       </div>
 

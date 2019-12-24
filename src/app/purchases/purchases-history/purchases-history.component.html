@@ -1,14 +1,16 @@
+<h2>History of Refills</h2>
 <div *ngIf="purchases && !purchases.length" class="alert alert-warning">
   <p>No purchases found</p>
 </div>
-<div class="table-responsive position-relative">
+
+<div class="table-responsive position-relative" style="font-size: 16px">
   <table *ngIf="purchases && purchases.length" class="table">
     <thead>
     <tr>
       <th scope="col">Phone number</th>
       <th scope="col" class="text-center">Type</th>
       <th scope="col" class="text-center">Amount</th>
-      <th scope="col" class="text-right">Date de création</th>
+      <th scope="col" class="text-right">Creation Date</th>
     </tr>
     </thead>
     <tbody>
@@ -26,8 +28,8 @@
 </div>
 <div *ngIf="purchases && purchases.length" class="row">
   <div class="col-sm-6 table-records-info">
-    Affichage de {{pageSize * (page - 1) + 1}} - {{ pageSize * page > totalCount ? totalCount : pageSize * page }}
-    sur {{totalCount}}
+    Display of {{pageSize * (page - 1) + 1}} - {{ pageSize * page > totalCount ? totalCount : pageSize * page }}
+    out of {{totalCount}}
   </div>
   <div class="col-sm-6 table-records-pages pull-right">
     <ngb-pagination [collectionSize]="totalCount" [(page)]="page" [pageSize]="pageSize" (pageChange)="loadPurchases()"

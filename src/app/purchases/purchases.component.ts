@@ -7,10 +7,10 @@ import {Component, OnInit} from '@angular/core';
           <div class="collapse navbar-collapse" id="navbarNav">
               <ul class="navbar-nav">
                   <li class="nav-item active mr-3">
-                      <a class="nav-link" routerLink="/purchases/operators"> make recharge<span class="sr-only">(current)</span></a>
+                      <a class="nav-link" routerLink="/purchases/operators">Make Refill<span class="sr-only">(current)</span></a>
                   </li>
                   <li class="nav-item">
-                      <a class="nav-link" routerLink="/purchases/history">History of recharges</a>
+                      <a class="nav-link" routerLink="/purchases/history">History of Refills</a>
                   </li>
               </ul>
           </div>
