@@ -1,18 +1,47 @@
 <h4>Recharge / {{operator}}</h4>
 <div class="row mt-5">
   <div class="col-sm-12">
-    <form [formGroup]="purchaseForm" (ngSubmit)="create()">
+    <form [formGroup]="purchaseForm" (ngSubmit)="showModal()">
+      <div class="modal fade" id="verifyModal" tabindex="-1" role="dialog" aria-labelledby="verifyModalLable"
+           aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="verifyModalLabel">Enter Verification Code</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="form-group row">
+                <label class="col-sm-3 text-left control-label col-form-label">Code</label>
+                <div class="col-sm-9">
+                  <input type="text" placeholder="Enter full Name" class="form-control" formControlName="code" name="code" [(ngModel)]="code">
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" (click)="create()">Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--end modal-->
       <div class="row form-group">
         <label class="col-sm-3">Numéro de téléphone (*)</label>
         <div class="input-group col-sm-2">
-          <input class="form-control" type="text" formControlName="phoneNumber" name="phoneNumber" [(ngModel)]="purchase.phoneNumber">
+          <input class="form-control" type="text" formControlName="phoneNumber" name="phoneNumber"
+                 [(ngModel)]="purchase.phoneNumber">
         </div>
       </div>
       <div class="form-group row">
         <label class="col-sm-3">Montant (*) </label>
         <div class="input-group col-sm-2">
-          <select class="form-control col-sm-12" formControlName="amount" name="amount" [(ngModel)]="purchase.amount">
-            <option value="" disabled> -- select your amount -- </option>
+          <select class="form-control col-sm-12" formControlName="amount" name="amount"
+                  [(ngModel)]="purchase.amount">
+            <option value="" disabled> -- select your amount --</option>
             <option value="10">10</option>
             <option value="20">20</option>
             <option value="25">25</option>
@@ -24,12 +53,14 @@
           </select>
         </div>
       </div>
+
       <div class="form-group row">
         <label class="col-sm-3">Type de Recharge (*) </label>
         <div class="input-group col-sm-2">
-          <select  class="form-control col-sm-12" formControlName="type" name="type" [(ngModel)]="purchase.type">
-            <option value="" disabled> -- select type of refill -- </option>
-            <option *ngFor="let purchaseType of purchaseTypes" value="{{purchaseType.type}}">{{purchaseType.type}}</option>
+          <select class="form-control col-sm-12" formControlName="type" name="type" [(ngModel)]="purchase.type">
+            <option value="" disabled> -- select type of refill --</option>
+            <option *ngFor="let purchaseType of purchaseTypes"
+                    value="{{purchaseType.type}}">{{purchaseType.type}}</option>
           </select>
         </div>
       </div>
@@ -37,23 +68,15 @@
         <label class="col-sm-3">Compte à Débiter (*) </label>
         <div class="input-group col-sm-2">
           <select class="form-control col-sm-12" formControlName="rib" name="rib" [(ngModel)]="purchase.rib">
-            <option value="" disabled> -- select your account -- </option>
-            <option *ngFor="let account of accounts" value="{{account.rib}}" >{{account?.rib}}</option>
+            <option value="" disabled> -- select your account --</option>
+            <option *ngFor="let account of accounts" value="{{account.rib}}">{{account?.rib}}</option>
           </select>
-        </div>
-      </div>
-      <div class="form-group row">
-        <div class="col-sm-3">
-          <input class="mr-2" type="checkbox">
-          <label>Ajouter aux favoris avec le libellé </label>
-        </div>
-        <div class="input-group col-sm-2">
-          <input class="form-control" type="text">
         </div>
       </div>
       <div class="row mb-4">
         <div class="col-sm-5">
-          <button class="btn btn-success float-right mx-2">Confirmer</button>
+          <button class="btn btn-success float-right mx-2">Confirmer
+          </button>
           <button class="btn btn-secondary float-right mx-2" routerLink="/purchases/operators">Annuler</button>
         </div>
       </div>

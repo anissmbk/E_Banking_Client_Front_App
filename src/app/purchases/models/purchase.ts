@@ -5,5 +5,6 @@ export interface Purchase {
   phoneNumber?: string,
   rib?: string,
   createdDate?: string,
-  operator?:string
+  operator?: string,
+
 }
