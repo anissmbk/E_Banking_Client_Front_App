@@ -10,14 +10,13 @@
       <div class="navbar-header" data-logobg="skin5">
         <a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)"><i
           class="ti-menu ti-close"></i></a>
-        <a class="navbar-brand" href="index.html">
+        <a class="navbar-brand">
           <b class="logo-icon p-l-10">
-            <img src="../../assets/images/logo-icon.png" alt="homepage" class="light-logo"/>
-
+            <i style="color: #fff;font-size: 40px;position: relative;top: 6px;left: 5px" class="zmdi zmdi-landscape"></i>
           </b>
-          <span class="logo-text">
-                             <img src="../../assets/images/logo-text.png" alt="homepage" class="light-logo"/>
-                        </span>
+          <span style="color: #fff;margin-left: 20px" class="logo-text">
+            Atlas Bank
+          </span>
         </a>
         <a class="topbartoggler d-block d-md-none waves-effect waves-light" href="javascript:void(0)"
            data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -121,7 +120,7 @@
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="javascript:void(0)"><i class="ti-settings m-r-5 m-l-5"></i> Account Setting</a>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-power-off m-r-5 m-l-5"></i> Logout</a>
+              <a class="dropdown-item" (click)="logout()" ><i class="fa fa-power-off m-r-5 m-l-5"></i> Logout</a>
               <div class="dropdown-divider"></div>
               <div class="p-l-30 p-10"><a href="javascript:void(0)" class="btn btn-sm btn-success btn-rounded">View
                 Profile</a></div>

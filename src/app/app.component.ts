@@ -32,4 +32,11 @@ export class AppComponent {
       }
     });
   }
+
+  logout() {
+    localStorage.setItem('user', null);
+    localStorage.setItem('token', null);
+    this.authService.authenticationState.next(false);
+  }
+
 }
