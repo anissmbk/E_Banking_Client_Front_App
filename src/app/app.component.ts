@@ -37,6 +37,7 @@ export class AppComponent {
     localStorage.setItem('user', null);
     localStorage.setItem('token', null);
     this.authService.authenticationState.next(false);
+    this.router.navigateByUrl("/login");
   }
 
 }
