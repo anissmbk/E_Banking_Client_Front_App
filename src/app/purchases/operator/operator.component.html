@@ -1,14 +1,14 @@
 <h4 class="mx-2 mb-3">The list of operators</h4>
-<div class="card card-body bg-light position-relative">
+<div class="card card-body bg-light position-relative" style="border-radius: 16px">
   <div class="flip-card">
-    <div class="flip-card-inner">
+    <div class="flip-card-inner" *ngFor="let operator of operators">
       <div class="flip-card-front">
         <img src="../../../assets/images/operator.png" alt="Avatar" style="width:300px;height:200px;">
       </div>
-      <div *ngFor="let operator of operators" class="flip-card-back">
+      <div class="flip-card-back">
         <div>
-          <h1>{{operator.name}}</h1>
-          <button class="btn btn-primary" routerLink="/purchases/purchase/{{operator.name}}" >Refill</button>
+          <h1 class="header my-5" >{{operator.name}}</h1>
+          <button class="btn btn-secondary px-5 " style="font-size: 20px;font-weight: bold" routerLink="/purchases/purchase/{{operator.name}}" >Refill</button>
         </div>
       </div>
     </div>
